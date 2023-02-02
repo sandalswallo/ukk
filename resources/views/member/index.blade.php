@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('title')
-    member
+    Member
 @endsection
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>member</h1>
+            <h1>Member</h1>
         </div>
 
         <div class="section-body">

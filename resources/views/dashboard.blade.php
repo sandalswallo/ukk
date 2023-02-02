@@ -18,11 +18,11 @@
 
         <div class="card-wrap">
             <div class="card-header">
-              Total User
+              <h4>Total User</h4>
             </div>
 
             <div class="card-body">
-              10
+              {{$user->count()}}
             </div>
           </div>
       </div>
@@ -36,11 +36,11 @@
 
         <div class="card-wrap">
             <div class="card-header">
-              Total Data
+             <h4>OUTLET</h4>
             </div>
 
             <div class="card-body">
-              10
+              {{$outlet->count()}}
             </div>
           </div>
       </div>
@@ -54,11 +54,11 @@
 
         <div class="card-wrap">
             <div class="card-header">
-              Total Report
+              <h4>MEMBER</h4>
             </div>
 
             <div class="card-body">
-              10
+              {{$member->count()}}
             </div>
           </div>
       </div>

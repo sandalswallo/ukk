@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('title')
-    outlet
+    Outlet
 @endsection
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>outlet</h1>
+            <h1>Outlet</h1>
         </div>
 
         <div class="section-body">

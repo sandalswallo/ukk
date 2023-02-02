@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('paket', function (Blueprint $table) {
             $table->id();
-            $table->id();
+            $table->id('id_outlet');
             $table->id();
             $table->timestamps();
         });
