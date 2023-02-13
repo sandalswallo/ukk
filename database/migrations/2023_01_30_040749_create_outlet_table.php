@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('outlet', function (Blueprint $table) {
             $table->id();
-            $table->String('nama');
+            $table->String('nama_outlet');
             $table->text('alamat');
             $table->String('telepon');
             $table->timestamps();

@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth', 'checkRole:admin'], function () {
   Route::get('/member/data', [MemberController::class, 'data'])->name('member.data');
   Route::resource('/member', MemberController::class);
 
+  Route::get('/user/data', [UserController::class, 'data'])->name('user.data');
   Route::resource('/user', UserController::class);
   Route::get('/user/{id}/profile', [UserController::class, 'profile'])->name('user.profile');
   // Route::post('/profile/{id}', [UserController::class, 'update'])->name('profile.update');

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Str;
 
 class UserTableSeeder extends Seeder
 {
@@ -15,11 +16,13 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'Ferdy',
-            'email' => 'ferdy123@admin.com',
-            'password' => bcrypt('ing27'),
-            'role' => 'admin'
+        DB::table('user')->insert([
+            'role_id' => '1',
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('admin'),
+            'remember_token' => Str::random(20)
         ]);
     }
-}
+    }
+

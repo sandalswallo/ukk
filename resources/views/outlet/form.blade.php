@@ -15,8 +15,8 @@ data-backdrop="static" data-keyboard="false">
                     @method('PUT')
 
                     <div class="form-group">
-                        <label for="nama">Nama Outlet</label>
-                        <input type="text" class="form-control" name="nama" id="nama">
+                        <label for="nama_outlet">Nama Outlet</label>
+                        <input type="text" class="form-control" name="nama_outlet" id="nama_outlet">
                     </div>
 
                     <div class="form-group">

@@ -9,8 +9,10 @@ class Outlet extends Model
 {
     use HasFactory;
 
-    protected $table = 'member';
+    protected $table = 'outlet';
+    protected $fillable = ['nama_outlet', 'telepon', 'alamat',];
 
-    protected $guarded = [];
-
+    public function transaksi(){
+        return $this->belongsTo(Transaksi::class);
+}
 }

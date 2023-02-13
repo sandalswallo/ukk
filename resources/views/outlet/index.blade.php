@@ -35,7 +35,7 @@
                                 <thead>
                                     <tr>
                                         <td scope="col" style="width: 50px;">No</td>
-                                        <td scope="col">Nama</td>
+                                        <td scope="col">Nama Outlet</td>
                                         <td scope="col">Alamat</td>
                                         <td scope="col">Tlp</td>                               
                                         <td scope="col" style="width: 120px;">Aksi</td>
@@ -70,7 +70,7 @@
             },
             columns: [
                 {data: 'DT_RowIndex'},
-                {data: 'nama'},
+                {data: 'nama_outlet'},
                 {data: 'alamat'},
                 {data: 'telepon'},
                 {data: 'aksi'}
@@ -140,7 +140,7 @@
         
         $.get(url)
             .done((response) => {
-                $('#modalForm [name=nama]').val(response.nama);
+                $('#modalForm [name=nama_outlet]').val(response.nama_outlet);
                 $('#modalForm [name=alamat]').val(response.alamat);
                 $('#modalForm [name=telepon]').val(response.telepon);
                 

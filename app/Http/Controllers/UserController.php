@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use Validator;
+use Str;
 
 class UserController extends Controller
 {
@@ -21,6 +23,27 @@ class UserController extends Controller
         return view('user.index', compact('user'));
     }
 
+    public function data(){
+        $user = User::orderBy('id', 'desc')->get();
+
+        return datatables()
+        ->of($user)
+        ->addIndexColumn()
+        ->editColumn('role_id', function($user){
+            return $user->role->nama;
+        })
+        ->addColumn('aksi', function($user){
+            return'
+            <div class="btn-group">
+                <button onclick="editData(`'.route('user.update', $user->id).'`)" class="btn btn-flat btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+                <button onclick="deleteData(`'.route('user.destroy', $user->id).'`)" class="btn btn-flat btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+            </div>
+            ';
+        })
+        ->rawColumns(['aksi'])
+        ->make(true);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -28,7 +51,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.form');
     }
 
     /**
@@ -39,7 +62,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|alpha',
+            'email' => 'required',
+            'password' => 'required',
+            'role_id' => 'required'
+        ]);
+
+       $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+        'remember_token' => Str::random(20),
+        'role_id' => $request->role_id
+       ]);
+
+       return response()->json([
+        'success' => true,
+        'massage' => 'Data berhasil disimpan',
+        'data' => $user
+       ]);
     }
 
     /**
@@ -50,7 +92,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return response()->json($user);
     }
 
     /**
@@ -61,7 +104,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('user.form', compact('user')); 
     }
 
     /**
@@ -94,7 +138,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
     }
 
     public function profile($id)
