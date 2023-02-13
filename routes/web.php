@@ -7,7 +7,8 @@ use App\Http\Controllers\{
   DashboardController,
   UserController,
   MemberController,
-  OutletController
+  OutletController,
+  PaketController,
 };
 
 Route::get('/', function () {
@@ -25,6 +26,9 @@ Route::group(['middleware' => 'auth', 'checkRole:admin'], function () {
   //route outlet
   Route::get('/outlet/data', [OutletController::class, 'data'])->name('outlet.data');
   Route::resource('/outlet', OutletController::class);
+
+  Route::get('/paket/data', [OutletController::class, 'data'])->name('paket.data');
+  Route::resource('/paket', OutletController::class);
 
   Route::get('/member/data', [MemberController::class, 'data'])->name('member.data');
   Route::resource('/member', MemberController::class);

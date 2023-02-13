@@ -35,9 +35,10 @@
                                 <thead>
                                     <tr>
                                         <td scope="col" style="width: 50px;">No</td>
-                                        <td scope="col">Nama</td>
-                                        <td scope="col">Alamat</td>
-                                        <td scope="col">Tlp</td>                               
+                                        {{-- <td scope="col">id</td> --}}
+                                        <td scope="col">Nama paket</td>
+                                        <td scope="col">jenis</td>
+                                        <td scope="col">harga</td>                               
                                         <td scope="col" style="width: 120px;">Aksi</td>
                                     </tr>
                                 </thead>
@@ -70,10 +71,10 @@
             },
             columns: [
                 {data: 'DT_RowIndex'},
-                {data: 'nama'},
-                {data: 'alamat'},
-                {data: 'telepon'},
-                {data: 'aksi'}
+                {data: 'id_outlet'},
+                {data: 'nama_paket'},
+                {data: 'jenis'},
+                {data: 'harga'}
             ]
         });
     })
@@ -140,9 +141,10 @@
         
         $.get(url)
             .done((response) => {
-                $('#modalForm [name=nama]').val(response.nama);
-                $('#modalForm [name=alamat]').val(response.alamat);
-                $('#modalForm [name=telepon]').val(response.telepon);
+                $('#modalForm [name=id_outlet]').val(response.id_outlet);
+                $('#modalForm [name=nama_paket]').val(response.nama_paket);
+                $('#modalForm [name=jenis]').val(response.jenis);
+                $('#modalForm [name=harga]').val(response.harga);
                 
             })
             .fail((errors) => {

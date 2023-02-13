@@ -15,18 +15,29 @@ data-backdrop="static" data-keyboard="false">
                     @method('PUT')
 
                     <div class="form-group">
-                        <label for="nama"></label>
-                        <input type="text" class="form-control" name="nama" id="nama">
+                        <label for="id_outlet">No</label>
+                        <input type="integer" class="form-control" name="id_outlet" id="id_outlet">
                     </div>
 
                     <div class="form-group">
-                        <label for="alamat">Alamat Outlet</label>
-                        <input type="text" class="form-control" name="alamat" id="alamat">
+                        <label for="nama_paket"> Nama Paket</label>
+                        <input type="text" class="form-control" name="nama_paket" id="nama_paket">
+                    </div>
+
+                    <div class="my-1">
+                        <label class="mb-2" for="jenis">Paket</label>
+                        <br>
+                        <select name="jenis" id="jenis" value="{{ old('jenis')}}" class="form-control">
+                            <option selected>Pilih...</option>
+                            <option value="Cuci kering"> Cuci kering</option>
+                            <option value="Cuci basah"> Cuci basah</option>
+                            <option value="Cuci setrika"> Cuci setrika</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="telepon">Telepon</label>
-                        <input type="integer" class="form-control" name="telepon" id="telepon">
+                        <label for="harga">harga</label>
+                        <input type="integer" class="form-control" name="harga" id="harga">
                     </div>
                     
                     <div class="modal-footer justify-content-between">
