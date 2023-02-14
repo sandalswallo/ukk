@@ -27,8 +27,8 @@ Route::group(['middleware' => 'auth', 'checkRole:admin'], function () {
   Route::get('/outlet/data', [OutletController::class, 'data'])->name('outlet.data');
   Route::resource('/outlet', OutletController::class);
 
-  Route::get('/paket/data', [OutletController::class, 'data'])->name('paket.data');
-  Route::resource('/paket', OutletController::class);
+  Route::get('/paket/data', [PaketController::class, 'data'])->name('paket.data');
+  Route::resource('/paket', PaketController::class);
 
   Route::get('/member/data', [MemberController::class, 'data'])->name('member.data');
   Route::resource('/member', MemberController::class);

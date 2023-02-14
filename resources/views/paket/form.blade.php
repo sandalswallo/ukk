@@ -13,31 +13,50 @@ data-backdrop="static" data-keyboard="false">
                 <form action="" method="post">
                     @csrf
                     @method('PUT')
-
+                    
                     <div class="form-group">
-                        <label for="id_outlet">No</label>
-                        <input type="integer" class="form-control" name="id_outlet" id="id_outlet">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nama_paket"> Nama Paket</label>
-                        <input type="text" class="form-control" name="nama_paket" id="nama_paket">
-                    </div>
-
-                    <div class="my-1">
-                        <label class="mb-2" for="jenis">Paket</label>
-                        <br>
-                        <select name="jenis" id="jenis" value="{{ old('jenis')}}" class="form-control">
+                        <label class="mt-2" for="nama">Outlet</label>
+                        <select type="text" name="outlet_id" id="outlet_id" value="{{ old('outlet_id')}}" class="form-control @error('outlet_id') is-invalid @enderror">
                             <option selected>Pilih...</option>
-                            <option value="Cuci kering"> Cuci kering</option>
-                            <option value="Cuci basah"> Cuci basah</option>
-                            <option value="Cuci setrika"> Cuci setrika</option>
+                            @foreach($outlet as $outlet)
+                            <option value="{{$outlet->id}}">{{$outlet->nama}}</option>
+                            @endforeach
+                            @error('outlet_id')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </select>
                     </div>
 
+                        <div class="form-group">
+                            <label class="mb-2" for="nama">Jenis paket</label>
+                            <br>
+                            <select name="jenis_paket" id="jenis_paket" value="{{ old('jenis_paket')}}" class="form-control">
+                                <option value="kiloan"> kiloan</option>
+                                <option value="satuan"> satuan</option>
+                            </select>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label class="mb-2" for="nama">Cucian</label>
+                            <br>
+                            <select name="cucian" id="cucian" value="{{ old('cucian')}}" class="form-control">
+                                <option value="baju"> Baju</option>
+                                <option value="celana"> Celana</option>
+                                <option value="selimut"> Selimut</option>
+                                <option value="bedcover"> BedCover</option>
+                            </select>
+                        </div>
+
                     <div class="form-group">
-                        <label for="harga">harga</label>
-                        <input type="integer" class="form-control" name="harga" id="harga">
+                        <label for="nama">Nama paket</label>
+                        <input type="text" class="form-control" name="nama_paket" id="nama_paket">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nama">Harga</label>
+                        <input type="number" class="form-control" name="harga" id="harga">
                     </div>
                     
                     <div class="modal-footer justify-content-between">

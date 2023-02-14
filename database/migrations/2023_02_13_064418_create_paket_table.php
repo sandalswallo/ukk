@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('paket', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_outlet');
+            $table->integer('outlet_id');
+            $table->enum('jenis_paket',['kiloan','satuan']);
+            $table->enum('cucian',['baju','celana','selimut','bedcover']);
             $table->String('nama_paket');
-            $table->enum('jenis',['Cuci kering','Cuci basah','Cuci setrika']);
             $table->integer('harga');
             $table->timestamps();
         });

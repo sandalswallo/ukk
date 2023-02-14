@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Transaksi;
+use App\Models\Paket;
 
 class Outlet extends Model
 {
@@ -15,4 +17,9 @@ class Outlet extends Model
     public function transaksi(){
         return $this->belongsTo(Transaksi::class);
 }
+
+    public function paket(){
+    return $this->belongsTo(Paket::class);
+}
+
 }

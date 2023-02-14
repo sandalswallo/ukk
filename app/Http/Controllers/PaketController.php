@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Paket;
+use App\Models\Outlet;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -16,28 +17,31 @@ class PaketController extends Controller
     public function index()
     {
         $paket = Paket::all();
-        return view('paket.index', compact('paket'));
+        $outlet = Outlet::all();
+
+        return view('paket.index', compact('paket', 'outlet'));
     }
 
-    public function data() // Menambahkan DataTable
-    {
+    public function data(){
         $paket = Paket::orderBy('id', 'desc')->get();
 
         return datatables()
         ->of($paket)
         ->addIndexColumn()
+        ->editColumn('outlet_id', function($paket){
+            return $paket->outlet->nama;
+        })
         ->addColumn('aksi', function($paket){
-            return '
-            
+            return'
             <div class="btn-group">
-                <button onclick="editData(`' .route('paket.update', $paket->id). '`)" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button>
-                <button onclick="deleteData(`' .route('paket.destroy', $paket->id). '`)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                <button onclick="editData(`'.route('paket.update', $paket->id).'`)" class="btn btn-flat btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+                <button onclick="deleteData(`'.route('paket.destroy', $paket->id).'`)" class="btn btn-flat btn-xs btn-danger"><i class="fa fa-trash"></i></button>
             </div>
-        ';
-    })
-    ->rawColumns(['aksi'])
-    ->make(true);
-}
+            ';
+        })
+        ->rawColumns(['aksi'])
+        ->make(true);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -46,7 +50,7 @@ class PaketController extends Controller
      */
     public function create()
     {
-        //
+        return view('paket.form');
     }
 
     /**
@@ -57,85 +61,87 @@ class PaketController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make ($request->all(), [
-            'id_outlet' => 'required',
+        $validator = Validator::make($request->all(),[
+            'outlet_id' => 'required',
+            'jenis_paket' => 'required',
+            'cucian' => 'required',
             'nama_paket' => 'required',
-            'jenis' => 'required',
             'harga' => 'required|numeric'
         ]);
 
-        if($validator->fails()){
-            return response()->json($validator->errors(), 422); 
-        }
+       $paket = Paket::create([
+        'outlet_id' => $request->outlet_id,
+        'jenis_paket' => $request->jenis_paket,
+        'cucian' =>$request->cucian,
+        'nama_paket' => $request->nama_paket,
+        'harga' => $request->harga
+       ]);
 
-        $paket = Paket::create([
-            'id_outlet' => $request->id_outlet,
-            'nama_paket' => $request->nama_paket,
-            'jenis' => $request->jenis,
-            'harga' => $request->harga
-        ]);
-
-        return response()->json([
-            'success'=>true,
-            'message' => 'Data Berhasil Tesimpan',
-            'data' => $paket
-        ]);
+       return response()->json([
+        'success' => true,
+        'massage' => 'Data berhasil disimpan',
+        'data' => $paket
+       ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\paket  $paket
+     * @param  \App\Models\Paket  $paket
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $paket=Paket::find($id);
+        $paket = Paket::find($id);
+        
         return response()->json($paket);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\paket  $paket
+     * @param  \App\Models\Paket  $paket
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $paket = Paket::find($id);
-        return view('paket.index', compact('paket'));
+        $paket->outlet_id = $request->outlet_id;
+        $paket->jenis_paket = $request->jenis_paket;
+        $paket->cucian = $request->cucian;
+        $paket->nama_paket = $request->nama_paket;
+        $paket->harga = $request->harga;
+        return view('paket.form', compact('paket')); 
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\paket  $paket
+     * @param  \App\Models\Paket  $paket
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $paket = Paket::find($id);
-        $paket->id_outlet = $request->id_outlet;
+        $paket->outlet_id = $request->outlet_id;
+        $paket->jenis_paket = $request->jenis_paket;
+        $paket->cucian = $request->cucian;
         $paket->nama_paket = $request->nama_paket;
-        $paket->jenis = $request->jenis;
         $paket->harga = $request->harga;
         $paket->update();
-
-        return response()->json('Data Berhasil Disimpan');
+        return response()->json('Data berhasil disimpan');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\paket  $paket
+     * @param  \App\Models\Paket  $paket
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( $id)
     {
         $paket = Paket::find($id);
         $paket->delete();
- 
-        return redirect('paket');
     }
 }
