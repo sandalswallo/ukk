@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('outlet_id');
             $table->enum('jenis_paket',['kiloan','satuan']);
-            $table->enum('cucian',['baju','celana','selimut','bedcover']);
+            $table->enum('cucian',['baju', 'celana', 'selimut', 'bedcover']);
             $table->String('nama_paket');
             $table->integer('harga');
             $table->timestamps();

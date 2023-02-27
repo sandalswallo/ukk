@@ -17,8 +17,15 @@
       <li class="{{ active('outlet*')}}">
         <a class="nav-link" href="/outlet"><i class="fas fa-store"></i><span>Outlet</span></a>
       </li>
-      <li class="{{ active('paket*')}}">
-        <a class="nav-link" href="/paket"><i class="fas fa-boxes"></i><span>Paket</span></a>
+      <li class="{{ active('paket*')}} dropdown">
+        <a class="nav-link has-dropdown"><i class="fas fa-boxes"></i><span>Pilih</span></a>
+        <ul class="dropdown-menu" style="display: block;">
+          <li><a class="nav-link" href="/paket">Paket</a></li>
+          <li><a class="nav-link" href="/cucian">Cucian</a></li>
+          <li><a class="nav-link" href="/jenispaket">Jenis Paket</a></li>
+          <li><a class="nav-link" href="/layanan">Layanan</a></li>
+          <li><a class="nav-link" href="/berat">Berat</a></li>
+        </ul>
       </li>
       <li class="{{ active('member*')}}">
         <a class="nav-link" href="/member"><i class="fas fa-users"></i><span>Member</span></a>

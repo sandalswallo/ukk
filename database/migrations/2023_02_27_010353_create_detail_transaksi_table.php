@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('user', function (Blueprint $table) {
-            $table->string('avatar')->nullable()->after('password');
+        Schema::create('detail_transaksi', function (Blueprint $table) {
+            $table->id();
+            $table->integer('transaksi_id');
+            $table->integer('paket_id');
+            $table->double('qty');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('user', function (Blueprint $table) {
-            $table->dropColumn('avatar');
-        });
+        Schema::dropIfExists('detail_transaksi');
     }
 };
